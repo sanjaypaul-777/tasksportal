@@ -3,3 +3,6 @@ deployment:
   tasks:
     - /bin/npm ci
     - /bin/npm run build
+    - /bin/mkdir -p ~/tasksportal.online
+    - /bin/rm -rf ~/tasksportal.online/*
+    - /bin/cp -a dist/. ~/tasksportal.online/
