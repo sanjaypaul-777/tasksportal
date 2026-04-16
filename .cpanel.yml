@@ -1,8 +1,9 @@
 ---
 deployment:
   tasks:
+    - cd /home/branemlz/repositories/tasksportal
     - npm ci
     - npm run build
-    - mkdir -p ~/tasksportal.online
-    - rm -rf ~/tasksportal.online/*
-    - cp -a dist/. ~/tasksportal.online/
+    - mkdir -p /home/branemlz/tasksportal.online
+    - rm -rf /home/branemlz/tasksportal.online/*
+    - cp -a /home/branemlz/repositories/tasksportal/dist/. /home/branemlz/tasksportal.online/
