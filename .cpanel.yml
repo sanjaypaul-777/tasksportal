@@ -1,0 +1,7 @@
+---
+deployment:
+  tasks:
+    - /bin/npm ci
+    - /bin/npm run build
+    - /bin/rm -rf ~/public_html/*
+    - /bin/cp -R dist/* ~/public_html/
