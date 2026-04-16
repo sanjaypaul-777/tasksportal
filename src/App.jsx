@@ -24,6 +24,7 @@ const navLinks = [
   { key: "contact", label: "Contact" },
 ];
 const SUPPORT_EMAIL = "support@tasksportal.online";
+const BEMOB_CAMPAIGN_URL = "https://ggawc.bemobtrcks.com/go/ada03803-b2d6-4d73-ac3b-ba3e07505ca2";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -338,6 +339,7 @@ export default function App() {
   });
   const [view, setView] = useState("home");
   const [activeNav, setActiveNav] = useState("home");
+  const [activeCta, setActiveCta] = useState(null);
   const [activityFeed, setActivityFeed] = useState(() =>
     shuffleArray(payoutFeedSeed)
       .slice(0, 4)
@@ -451,6 +453,26 @@ export default function App() {
 
   const legalView = view !== "home";
 
+  function handlePrimaryCtaClick(ctaName) {
+    if (activeCta) return;
+
+    if (Array.isArray(window.dataLayer)) {
+      window.dataLayer.push({ event: "click", cta: ctaName });
+    }
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "click", { event_category: "cta", event_label: ctaName });
+    }
+
+    const targetUrl = new URL(BEMOB_CAMPAIGN_URL);
+    targetUrl.searchParams.set("event", "click");
+    targetUrl.searchParams.set("cta", ctaName);
+
+    setActiveCta(ctaName);
+    window.setTimeout(() => {
+      window.location.assign(targetUrl.toString());
+    }, 500);
+  }
+
   return (
     <div className="relative overflow-x-hidden">
       <div className="h-10 overflow-hidden border-b border-white/10 bg-slate-950/70">
@@ -481,7 +503,13 @@ export default function App() {
           </nav>
 
           <div className="hidden md:block">
-            <button className="cta-button animate-pulse">Join Now</button>
+            <button
+              type="button"
+              onClick={() => handlePrimaryCtaClick("header_join_now")}
+              className="cta-button animate-pulse"
+            >
+              {activeCta === "header_join_now" ? "Connecting to Portal..." : "Join Now"}
+            </button>
           </div>
 
           <button
@@ -531,7 +559,13 @@ export default function App() {
                       {link.label}
                     </button>
                   ))}
-                  <button className="cta-button mt-4 w-full animate-pulse">Join Now</button>
+                  <button
+                    type="button"
+                    onClick={() => handlePrimaryCtaClick("mobile_join_now")}
+                    className="cta-button mt-4 w-full animate-pulse"
+                  >
+                    {activeCta === "mobile_join_now" ? "Connecting to Portal..." : "Join Now"}
+                  </button>
                 </div>
               </motion.div>
             </>
@@ -577,9 +611,19 @@ export default function App() {
                     Works on PC, Mac, Tablet, and Mobile.
                   </p>
                   <SpotTracker spotsLeft={spotsLeft} />
-                  <button className="cta-button animate-pulse group">
-                    Check Availability & Start Now
-                    <ArrowRight size={18} className="interactive group-hover:translate-x-1" />
+                  <button
+                    type="button"
+                    onClick={() => handlePrimaryCtaClick("hero_get_started")}
+                    className="cta-button animate-pulse group"
+                  >
+                    {activeCta === "hero_get_started" ? (
+                      "Connecting to Portal..."
+                    ) : (
+                      <>
+                        Check Availability & Start Now
+                        <ArrowRight size={18} className="interactive group-hover:translate-x-1" />
+                      </>
+                    )}
                   </button>
                 </div>
 
@@ -668,9 +712,19 @@ export default function App() {
                 <div className="mt-6">
                   <SpotTracker compact spotsLeft={spotsLeft} />
                 </div>
-                <button className="cta-button group mt-8 animate-pulse">
-                  Check Availability & Start Now
-                  <ArrowRight size={18} className="interactive group-hover:translate-x-1" />
+                <button
+                  type="button"
+                  onClick={() => handlePrimaryCtaClick("final_get_started")}
+                  className="cta-button group mt-8 animate-pulse"
+                >
+                  {activeCta === "final_get_started" ? (
+                    "Connecting to Portal..."
+                  ) : (
+                    <>
+                      Check Availability & Start Now
+                      <ArrowRight size={18} className="interactive group-hover:translate-x-1" />
+                    </>
+                  )}
                 </button>
               </motion.section>
 
