@@ -1,9 +1,9 @@
----
 deployment:
   tasks:
-    - cd /home/branemlz/repositories/tasksportal
-    - npm ci
-    - npm run build
-    - mkdir -p /home/branemlz/tasksportal.online
-    - rm -rf /home/branemlz/tasksportal.online/*
-    - cp -a /home/branemlz/repositories/tasksportal/dist/. /home/branemlz/tasksportal.online/
+    - export REPOPATH=/home/branemlz/repositories/tasksportal
+    - export DEPLOYPATH=/home/branemlz/tasksportal.online
+    - /bin/mkdir -p $DEPLOYPATH
+    - /usr/bin/npm --prefix $REPOPATH ci
+    - /usr/bin/npm --prefix $REPOPATH run build
+    - /bin/rm -rf $DEPLOYPATH/*
+    - /bin/cp -R $REPOPATH/dist/. $DEPLOYPATH/
