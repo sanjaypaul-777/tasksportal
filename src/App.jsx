@@ -302,7 +302,7 @@ function ContactView({ onBack }) {
 
 function ActivityFeed({ items }) {
   return (
-    <div className="fixed bottom-4 right-4 z-40 w-72 rounded-2xl border border-white/15 bg-slate-900/75 p-3 shadow-2xl backdrop-blur-xl">
+    <div className="fixed bottom-4 right-4 z-40 w-72 rounded-2xl border border-white/15 bg-slate-900/75 p-3 shadow-2xl backdrop-blur-xl max-sm:bottom-3 max-sm:right-3 max-sm:w-[calc(100vw-24px)]">
       <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-emerald-300">Live Activity</p>
       <div className="h-36 overflow-hidden">
         <AnimatePresence initial={false}>
