@@ -1,4 +1,6 @@
 node_modules/
 dist/
+cpanel-upload/
+*.zip
 .DS_Store
 *.log

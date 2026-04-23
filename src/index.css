@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
 }
 
 html,
@@ -13,26 +13,38 @@ body,
 }
 
 body {
-  @apply bg-slate-950 text-slate-100 antialiased;
-  background-image: radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.25), transparent 35%),
-    radial-gradient(circle at 85% 10%, rgba(59, 130, 246, 0.2), transparent 30%),
-    linear-gradient(to bottom, #020617, #0f172a);
+  @apply antialiased text-slate-200;
+  background-color: #0a0e17;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 0% 0%, rgba(88, 28, 135, 0.35), transparent 55%),
+    radial-gradient(ellipse 70% 55% at 100% 0%, rgba(30, 64, 175, 0.32), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(59, 130, 246, 0.12), transparent 45%),
+    radial-gradient(ellipse 50% 35% at 0% 100%, rgba(126, 34, 206, 0.15), transparent 40%),
+    linear-gradient(180deg, #0a0e17 0%, #0d121f 50%, #0a0e17 100%);
 }
 
 .interactive {
   @apply transition-all duration-300 ease-in-out;
 }
 
-.hover-card {
-  @apply border border-slate-200/20 hover:border-emerald-500 interactive;
+.neo-card {
+  @apply rounded-2xl border border-white/[0.08] bg-[#121826]/90 backdrop-blur-sm interactive;
 }
 
-.cta-button {
-  @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 px-6 py-3 font-semibold text-white shadow-lg shadow-emerald-700/30 interactive;
+.neo-card:hover {
+  @apply border-neon/30 shadow-lg shadow-[0_0_28px_rgba(0,242,255,0.18)];
 }
 
-.cta-button:hover {
-  @apply scale-105 brightness-110 shadow-xl shadow-emerald-500/40;
+.neo-cta {
+  @apply interactive inline-flex items-center justify-center gap-2 rounded-full bg-neon px-8 py-4 text-base font-bold text-vault shadow-neon;
+}
+
+.neo-cta:hover {
+  @apply scale-[1.03] brightness-110 shadow-neon;
+}
+
+.neo-cta-outline {
+  @apply interactive inline-flex items-center justify-center rounded-full border border-neon/50 bg-transparent px-6 py-3 text-sm font-semibold text-neon hover:bg-neon/10;
 }
 
 @media (prefers-reduced-motion: reduce) {
